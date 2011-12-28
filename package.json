@@ -1,0 +1,24 @@
+{
+  "name": "resourceful-mongo",
+  "description": "resourceful mongodb engine",
+  "version": "0.0.1",
+  "author": "Ryan Fitzgerald <ryan@codebrewstudios.com>",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com:codebrew/resourceful-mongo.git" 
+  },
+  "keywords": ["mongodb", "database", "ODM"],
+  "dependencies": {
+    "mongodb": "0.9.7-2-5",
+    "resourceful": "git://github.com/flatiron/resourceful.git"
+  },
+  "devDependencies": {
+    "mocha" : "*",
+    "should": "0.3.2"
+  },
+  "scripts": {
+    "test"  : "mocha --ui bdd --reporter spec --require should test/*-test.js"
+  },
+  "engines": { "node": ">= 0.4.0" },
+  "main": "./lib/resourceful-mongo"
+}
