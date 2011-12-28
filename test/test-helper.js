@@ -5,7 +5,7 @@ var resourceful = require('resourceful'),
 resourceful.env = 'test';
 
 var testDatabaseName = "resourceful-mongo-test",
-    host = "localhost",
+    host = "127.0.0.1",
     port = 27017;
 
 var DB = exports;
@@ -16,6 +16,9 @@ DB.start = function(callback) {
   testDB.open(function(err, db) {
     db.dropDatabase(callback);
   });
+
+  // setup default resourceful connection
+  resourceful.use("mongodb", {host: host, port : port, database : testDatabaseName});
 };
 
 DB.products = {

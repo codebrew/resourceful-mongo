@@ -28,5 +28,24 @@ describe('Connecting to mongoDB', function() {
     config.port.should.equal(5555);
     config.database.should.equal("test-db");
   });
+});
+
+describe("Creating", function() {
+  before(db.start);
+
+  it("creates a simple model", function(done){
+    var Person = resourceful.define('person');
+    Person.string('name');
+    Person.number('age');
+
+    Person.create({ name: 'Bob', age: 99 }, function (err, person) {
+      if (err) { done(err); }
+
+      should.exist(person._id);
+      person.age.should.equal(99);
+
+      done();
+    });
+  });
 
 });
