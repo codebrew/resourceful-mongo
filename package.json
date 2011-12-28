@@ -13,7 +13,7 @@
     "resourceful": "git://github.com/flatiron/resourceful.git"
   },
   "devDependencies": {
-    "mocha" : "*",
+    "mocha" : "0.8.x",
     "should": "0.3.2"
   },
   "scripts": {
