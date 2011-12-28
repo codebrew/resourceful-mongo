@@ -4,12 +4,9 @@ var db = require('./test-helper'),
     resourceful = require('resourceful');
 
 describe('Connecting to mongoDB', function() {
-  
-  // before(db.start);
 
   it("accepts a uri", function() {
-    resourceful.use("mongodb", "mongodb://test.mongodb.com:4444/resourceful-mongo-test");
-    var config = resourceful.connection.config;
+    var config = resourceful.use("mongodb", "mongodb://test.mongodb.com:4444/resourceful-mongo-test").connection.config;
     
     config.host.should.equal("test.mongodb.com");
     config.port.should.equal(4444);
@@ -17,8 +14,7 @@ describe('Connecting to mongoDB', function() {
   });
 
   it("connects to default db when no config is passed in", function() {
-    resourceful.use("mongodb");
-    var config = resourceful.connection.config;
+    var config = resourceful.use("mongodb").connection.config;
     
     config.host.should.equal("127.0.0.1");
     config.port.should.equal(27017);
@@ -26,9 +22,8 @@ describe('Connecting to mongoDB', function() {
   });
 
   it("accepts host, port and databasse", function() {
-    var x = resourceful.use("mongodb", {host: "test.host.com", port: 5555, database : "test-db"});
-    var config = resourceful.connection.config;
-    
+    var config = resourceful.use("mongodb", {host: "test.host.com", port: 5555, database : "test-db"}).connection.config;
+
     config.host.should.equal("test.host.com");
     config.port.should.equal(5555);
     config.database.should.equal("test-db");
