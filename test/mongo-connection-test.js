@@ -5,7 +5,7 @@ var db = require('./test-helper'),
 
 describe('Connecting to mongoDB', function() {
   
-  before(db.start);
+  // before(db.start);
 
   it("accepts a uri", function() {
     resourceful.use("mongodb", "mongodb://test.mongodb.com:4444/resourceful-mongo-test");
@@ -26,7 +26,7 @@ describe('Connecting to mongoDB', function() {
   });
 
   it("accepts host, port and databasse", function() {
-    resourceful.use("mongodb", {host: "test.host.com", port: 5555, database : "test-db"});
+    var x = resourceful.use("mongodb", {host: "test.host.com", port: 5555, database : "test-db"});
     var config = resourceful.connection.config;
     
     config.host.should.equal("test.host.com");
