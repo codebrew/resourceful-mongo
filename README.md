@@ -1,6 +1,6 @@
 #resourceful-mongo
 
-A MongoDB engine for [resourceful](https://github.com/flatiron/resourceful/), a datamapper part of the [flatiron](https://github.com/flatiron/) framework.
+A MongoDB engine for [resourceful](https://github.com/flatiron/resourceful/), a datamapper part of the [flatiron](https://github.com/flatiron/) project.
 
 #### Credits 
 
@@ -14,9 +14,9 @@ Ryan Fitzgerald, Follow [@TheRyanFitz on Twitter](http://twitter.com/#!/TheRyanF
   
   var Person = resourceful.define('person', function () {
     //
-    // Specify a storage engine
+    // Specify use of the mongodb engine
     //
-    this.use('mongo', {
+    this.use('mongodb', {
       collection: "people" // collection must always be set when using the mongo engine
     });
 
