@@ -91,17 +91,20 @@ describe("Finding", function(){
 
   });
 
-  it("gets by id", function(done) {
+  it("by id", function(done) {
 
     db.Person.create(db.people.bob, function(err, bob){
       db.Person.get(bob.id, function(err, foundBob){
         if(err) done(err);
 
-        console.log("found bob", foundBob);
+        foundBob.name.should.equal(bob.name);
+        foundBob.age.should.equal(bob.age);
+        foundBob._id.toString().should.equal(bob._id.toString());
+
         done();
       });
-    });
 
+    });
   });
 
 });
