@@ -1,8 +1,8 @@
-#resourceful-mongo
+#resourceful-mongo [![Build Status](https://secure.travis-ci.org/codebrew/resourceful-mongo.png)](http://travis-ci.org/codebrew/resourceful-mongo)
 
 A MongoDB engine for [resourceful](https://github.com/flatiron/resourceful/), a datamapper part of the [flatiron](https://github.com/flatiron/) project.
 
-#### Credits 
+#### Credits
 
 Ryan Fitzgerald, Follow [@TheRyanFitz on Twitter](http://twitter.com/#!/TheRyanFitz).
 
