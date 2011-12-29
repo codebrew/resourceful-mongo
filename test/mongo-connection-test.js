@@ -87,7 +87,21 @@ describe("Finding", function(){
         people.should.have.lengthOf(2)
         done();
       });
-      
     });
+
   });
+
+  it("gets by id", function(done) {
+
+    db.Person.create(db.people.bob, function(err, bob){
+      db.Person.get(bob.id, function(err, foundBob){
+        if(err) done(err);
+
+        console.log("found bob", foundBob);
+        done();
+      });
+    });
+
+  });
+
 });
