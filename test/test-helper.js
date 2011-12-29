@@ -18,7 +18,7 @@ DB.start = function(callback) {
   });
 
   // setup default resourceful connection
-  resourceful.use("mongodb", {host: host, port : port, database : testDatabaseName});
+  resourceful.use("mongodb", {host: host, port : port, database : testDatabaseName, collection : "test"});
 };
 
 DB.products = {

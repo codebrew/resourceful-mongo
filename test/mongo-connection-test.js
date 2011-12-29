@@ -3,10 +3,10 @@ var db = require('./test-helper'),
     should = require('should'),
     resourceful = require('resourceful');
 
-describe('Connecting to mongoDB', function() {
+describe('Connecting', function() {
 
   it("accepts a uri", function() {
-    var config = resourceful.use("mongodb", "mongodb://test.mongodb.com:4444/resourceful-mongo-test").connection.config;
+    var config = resourceful.use("mongodb", {uri:"mongodb://test.mongodb.com:4444/resourceful-mongo-test", collection: "test"}).connection.config;
     
     config.host.should.equal("test.mongodb.com");
     config.port.should.equal(4444);
@@ -14,7 +14,7 @@ describe('Connecting to mongoDB', function() {
   });
 
   it("connects to default db when no config is passed in", function() {
-    var config = resourceful.use("mongodb").connection.config;
+    var config = resourceful.use("mongodb", {collection: "tests"}).connection.config;
     
     config.host.should.equal("127.0.0.1");
     config.port.should.equal(27017);
@@ -22,12 +22,19 @@ describe('Connecting to mongoDB', function() {
   });
 
   it("accepts host, port and databasse", function() {
-    var config = resourceful.use("mongodb", {host: "test.host.com", port: 5555, database : "test-db"}).connection.config;
+    var config = resourceful.use("mongodb", {host: "test.host.com", port: 5555, database : "test-db", collection: "tests"}).connection.config;
 
     config.host.should.equal("test.host.com");
     config.port.should.equal(5555);
     config.database.should.equal("test-db");
   });
+
+  it("requires collection", function() {
+    var func = function(){ resourceful.use("mongodb"); };
+
+    should.throws(func);
+  });
+
 });
 
 describe("Creating", function() {
