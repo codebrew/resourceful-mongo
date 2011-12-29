@@ -6,6 +6,11 @@ A MongoDB engine for [resourceful](https://github.com/flatiron/resourceful/), a 
 
 Ryan Fitzgerald, Follow [@TheRyanFitz on Twitter](http://twitter.com/#!/TheRyanFitz).
 
+
+## Warning
+
+This project is in a very early stage, with limited functionality. Don't use in production.
+
 ## Example
 
 ``` js
