@@ -122,3 +122,23 @@ describe("Finding", function(){
   });
 
 });
+
+describe("Destroying", function() {
+  beforeEach(function(done) {
+    db.start(function() {
+      db.createPeople([{"_id": "34", name :"bob"}, db.people.steve], function(err) {
+        done();
+      });
+    });
+  });
+  
+  it("by id", function(done) {
+    db.Person.destroy("34", function(err, result) {
+      if(err) done(err);
+
+      result.should.equal(1);
+      done();
+    });
+  });
+
+});
