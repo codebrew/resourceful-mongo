@@ -26,3 +26,8 @@ DB.products = {
   "modcloth"  : {name: 'modcloth shoes', brand: "test brand"},
   "amazon"    : {name: 'amazon book', brand: "pragprog"}
 };
+
+DB.Person = resourceful.define('person', function() {
+  this.string('name');
+  this.number('age');
+});

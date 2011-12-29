@@ -41,11 +41,8 @@ describe("Creating", function() {
   before(db.start);
 
   it("creates a simple model", function(done){
-    var Person = resourceful.define('person');
-    Person.string('name');
-    Person.number('age');
-
-    Person.create({ name: 'Bob', age: 99 }, function (err, person) {
+    
+    db.Person.create({ name: 'Bob', age: 99 }, function (err, person) {
       if (err) { done(err); }
 
       should.exist(person._id);
@@ -60,12 +57,8 @@ describe("Creating", function() {
 describe("Updating", function() {
   before(db.start);
 
-  it("paritally updates model", function(done){
-    var Person = resourceful.define('person');
-    Person.string('name');
-    Person.number('age');
-
-    Person.create({ name: 'Bob', age: 99 }, function (err, person) {
+  it("paritally updates model", function(done) {
+    db.Person.create({ name: 'Bob', age: 99 }, function (err, person) {
       if (err) { done(err); }
       
       person.update({name:"Steve"}, function(err, person){
