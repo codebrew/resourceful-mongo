@@ -75,7 +75,7 @@ describe("Updating", function() {
 });
 
 describe("Finding", function(){
-  before(db.start);
+  beforeEach(db.start);
 
   it("all resources", function(done) {
     var p = db.people;
@@ -93,8 +93,8 @@ describe("Finding", function(){
 
   it("by id", function(done) {
 
-    db.Person.create(db.people.bob, function(err, bob){
-      db.Person.get(bob.id, function(err, foundBob){
+    db.Person.create(db.people.bob, function(err, bob) {
+      db.Person.get(bob.id, function(err, foundBob) {
         if(err) done(err);
 
         foundBob.name.should.equal(bob.name);
@@ -105,6 +105,20 @@ describe("Finding", function(){
       });
 
     });
+  });
+
+  it("by name", function(done) {
+    var p = db.people;
+    db.createPeople([p.bob, p.steve, p.joe], function() {
+
+      db.Person.find({name : "Bob"}, function(err, people){
+        if(err) done(err);
+
+        people.should.have.lengthOf(1);
+        done();
+      });
+    });
+
   });
 
 });
