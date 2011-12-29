@@ -73,3 +73,21 @@ describe("Updating", function() {
   });
 
 });
+
+describe("Finding", function(){
+  before(db.start);
+
+  it("all resources", function(done) {
+    var p = db.people;
+    db.createPeople([p["bob"], p["steve"]], function() {
+
+      db.Person.all(function(err, people){
+        if(err) done(err);
+
+        people.should.have.lengthOf(2)
+        done();
+      });
+      
+    });
+  });
+});

@@ -14,7 +14,8 @@
   },
   "devDependencies": {
     "mocha" : "0.8.x",
-    "should": "0.3.2"
+    "should": "0.3.2",
+    "utile": "0.0.10"
   },
   "scripts": {
     "test"  : "mocha --ui bdd --reporter spec --require should test/*-test.js"

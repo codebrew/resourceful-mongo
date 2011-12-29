@@ -1,4 +1,5 @@
-var resourceful = require('resourceful'),
+var async = require('utile').async,
+    resourceful = require('resourceful'),
     mongodb = require('mongodb').Db,
     Server = require('mongodb').Server;
 
@@ -21,13 +22,23 @@ DB.start = function(callback) {
   resourceful.use("mongodb", {host: host, port : port, database : testDatabaseName, collection : "test"});
 };
 
-DB.products = {
-  "asos"      : {name: 'asos jeans', brand: "test brand"},
-  "modcloth"  : {name: 'modcloth shoes', brand: "test brand"},
-  "amazon"    : {name: 'amazon book', brand: "pragprog"}
+DB.people = {
+  "bob"   : {name: 'Bob', age: 21},
+  "steve" : {name: 'Steve', age: 32},
+  "joe"   : {name: 'Joe', age: 43}
 };
 
 DB.Person = resourceful.define('person', function() {
   this.string('name');
   this.number('age');
 });
+
+DB.createPeople = function(people, callback) {
+  if(!Array.isArray(people)) people = [people];
+
+  async.forEach(people, DB.createPerson, callback);
+};
+
+DB.createPerson = function(person, callback) {
+  DB.Person.create(person, callback);
+};
