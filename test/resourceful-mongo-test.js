@@ -5,7 +5,7 @@ var db = require('./test-helper'),
 
 describe('Connecting', function() {
 
-  it("accepts a uri", function() {
+  it("by uri", function() {
     var config = resourceful.use("mongodb", {uri:"mongodb://test.mongodb.com:4444/resourceful-mongo-test", collection: "test"}).connection.config;
     
     config.host.should.equal("test.mongodb.com");
@@ -13,12 +13,26 @@ describe('Connecting', function() {
     config.database.should.equal("resourceful-mongo-test");
   });
 
-  it("connects to default db when no config is passed in", function() {
+  it("with safe param on uri", function() {
+    resourceful.use("mongodb", {uri:"mongodb://test.db.com:4444/test?safe=true", collection: "test"}).connection.config.safe.should.equal(true);
+    resourceful.use("mongodb", {uri:"mongodb://test.db.com:4444/test?safe=false", collection: "test"}).connection.config.safe.should.equal(false);
+  });
+
+  it("with safe option", function() {
+    resourceful.use("mongodb", {safe : "false", collection: "test"}).connection.config.safe.should.equal(false);
+    resourceful.use("mongodb", {safe : false, collection: "test"}).connection.config.safe.should.equal(false);
+    
+    resourceful.use("mongodb", {safe : "true", collection: "test"}).connection.config.safe.should.equal(true);
+    resourceful.use("mongodb", {safe : true, collection: "test"}).connection.config.safe.should.equal(true);
+  });
+
+  it("with defaults", function() {
     var config = resourceful.use("mongodb", {collection: "tests"}).connection.config;
     
     config.host.should.equal("127.0.0.1");
     config.port.should.equal(27017);
     config.database.should.equal("test");
+    config.safe.should.equal(false);
   });
 
   it("accepts host, port and databasse", function() {

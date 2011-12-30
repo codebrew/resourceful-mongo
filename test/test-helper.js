@@ -5,21 +5,25 @@ var async = require('utile').async,
 
 resourceful.env = 'test';
 
-var testDatabaseName = "resourceful-mongo-test",
-    host = "127.0.0.1",
-    port = 27017;
+var testConnection = {
+  host: "127.0.0.1", 
+  port : 27017, 
+  database : "resourceful-mongo-test", 
+  collection : "test",
+  safe : true
+}
 
 var DB = exports;
 
 DB.start = function(callback) {
   // drop the test database
-  var testDB = new mongodb(testDatabaseName, new Server(host, port, {}));
+  var testDB = new mongodb(testConnection.database, new Server(testConnection.host, testConnection.port, {}));
   testDB.open(function(err, db) {
     db.dropDatabase(callback);
   });
 
   // setup default resourceful connection
-  resourceful.use("mongodb", {host: host, port : port, database : testDatabaseName, collection : "test"});
+  resourceful.use("mongodb", testConnection);
 };
 
 DB.people = {

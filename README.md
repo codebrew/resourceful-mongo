@@ -22,11 +22,12 @@ This project is in a very early stage, with limited functionality. Don't use in 
     // Specify use of the mongodb engine
     //
     this.use('mongodb', {
-      collection: "people" // collection must always be set when using the mongo engine
+      collection: "people", // required - the collection to use for this resource
+      safe : true // optional - run the driver in safe mode to ensure that the update succeeded. Defaults to false
     });
-
-	this.string('name');
-   	this.number('age');
+    
+    this.string('name');
+    this.number('age');
   });
 ```
 
