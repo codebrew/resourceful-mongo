@@ -23,7 +23,7 @@ This project is in a very early stage, with limited functionality. Don't use in 
     //
     this.use('mongodb', {
       collection: "people", // required - the collection to use for this resource
-      safe : true // optional - run the driver in safe mode to ensure that the update succeeded. Defaults to false
+      safe : true // optional - run the engine in safe mode to ensure that writes for this resource succeed. Defaults to false
     });
     
     this.string('name');
