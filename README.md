@@ -21,7 +21,7 @@ This project is in a very early stage, with limited functionality. Don't use in 
     // Specify use of the mongodb engine
     //
     this.use('mongodb', {
-      database: 'flatiron_test' //required - databasename which contains collections
+      database: 'flatiron_test', //required - databasename which contains collections
       collection: "people", // required - the collection to use for this resource
       safe : true // optional - run the driver in safe mode to ensure that the update succeeded. Defaults to false
     });
