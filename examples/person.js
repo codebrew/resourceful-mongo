@@ -18,9 +18,9 @@ Person.create({
   name: "Bob",
   age: 18
 }, function (err, Bob) {
-  console.log(Bob);
+  console.log(err, Bob);
 
   Person.get(Bob._id, function (err, bob) {
-    console.log(bob);
+    console.log(err, bob);
   });
 });
