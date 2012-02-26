@@ -19,6 +19,8 @@ DB.start = function(callback) {
   // drop the test database
   var testDB = new mongodb(testConnection.database, new Server(testConnection.host, testConnection.port, {}));
   testDB.open(function(err, db) {
+    if (err) throw err
+
     db.dropDatabase(callback);
   });
 
