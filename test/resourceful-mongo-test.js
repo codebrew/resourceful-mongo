@@ -3,11 +3,19 @@ var db = require('./test-helper'),
     should = require('should'),
     resourceful = require('resourceful');
 
+beforeEach(db.drop);
+
 describe('Connecting', function() {
 
+  it("open new connection", function(done) {
+    resourceful.use("mongodb", {uri: "mongodb://127.0.0.1:27017/resourceful-mongo-test", onConnect: function(err) {
+       if (err) throw err;
+       done();
+    }});
+  });
+
   it("by uri", function() {
-    var config = resourceful.use("mongodb", {uri:"mongodb://test.mongodb.com:4444/resourceful-mongo-test", collection: "test"}).connection.config;
-    
+    var config = resourceful.use("mongodb", {uri: "mongodb://test.mongodb.com:4444/resourceful-mongo-test", collection: "test"}).connection.config;
     config.host.should.equal("test.mongodb.com");
     config.port.should.equal(4444);
     config.database.should.equal("resourceful-mongo-test");
@@ -52,9 +60,8 @@ describe('Connecting', function() {
 });
 
 describe("Creating", function() {
-  before(db.start);
 
-  it("creates a simple model", function(done){
+  it("creates a simple model", function(done) {
     
     db.Person.create({ name: 'Bob', age: 99 }, function (err, person) {
       if (err) { done(err); }
@@ -65,11 +72,9 @@ describe("Creating", function() {
       done();
     });
   });
-
 });
 
 describe("Updating", function() {
-  before(db.start);
 
   it("paritally updates model", function(done) {
     db.Person.create({ name: 'Bob', age: 99 }, function (err, person) {
@@ -83,13 +88,11 @@ describe("Updating", function() {
         done();
       });
     });
-
   });
 
 });
 
 describe("Finding", function(){
-  beforeEach(db.start);
 
   it("all resources", function(done) {
     var p = db.people;
@@ -102,7 +105,6 @@ describe("Finding", function(){
         done();
       });
     });
-
   });
 
   it("by id", function(done) {
@@ -139,10 +141,8 @@ describe("Finding", function(){
 
 describe("Destroying", function() {
   beforeEach(function(done) {
-    db.start(function() {
-      db.createPeople([{"_id": "34", name :"bob"}, db.people.steve], function(err) {
-        done();
-      });
+    db.createPeople([{"_id": "34", name :"bob", age: 22}, db.people.steve], function(err) {
+      done();
     });
   });
   
@@ -154,5 +154,4 @@ describe("Destroying", function() {
       done();
     });
   });
-
 });

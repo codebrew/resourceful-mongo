@@ -1,32 +1,11 @@
 var async = require('utile').async,
-    resourceful = require('resourceful'),
+    resourceful = require('../lib/resourceful-mongo'),
     mongodb = require('mongodb').Db,
     Server = require('mongodb').Server;
 
 resourceful.env = 'test';
 
-var testConnection = {
-  host: "127.0.0.1", 
-  port : 27017, 
-  database : "resourceful-mongo-test", 
-  collection : "test",
-  safe : true
-}
-
 var DB = exports;
-
-DB.start = function(callback) {
-  // drop the test database
-  var testDB = new mongodb(testConnection.database, new Server(testConnection.host, testConnection.port, {}));
-  testDB.open(function(err, db) {
-    if (err) throw err
-
-    db.dropDatabase(callback);
-  });
-
-  // setup default resourceful connection
-  resourceful.use("mongodb", testConnection);
-};
 
 DB.people = {
   "bob"   : {name: 'Bob', age: 21},
@@ -35,6 +14,13 @@ DB.people = {
 };
 
 DB.Person = resourceful.define('person', function() {
+
+  this.use("mongodb", {
+    uri: "mongodb://127.0.0.1:27017/resourceful-mongo-test",
+    collection: "people",
+    safe: true
+  });
+
   this.string('name');
   this.number('age');
 });
@@ -47,4 +33,16 @@ DB.createPeople = function(people, callback) {
 
 DB.createPerson = function(person, callback) {
   DB.Person.create(person, callback);
+};
+
+DB.drop = function(callback) {
+
+  this.timeout(10000);
+
+  if (!DB.Person.connection.connection) return callback();
+
+  DB.Person.connection.connection.dropDatabase(function(err) {
+    if (err) throw err;
+    callback();
+  });
 };
