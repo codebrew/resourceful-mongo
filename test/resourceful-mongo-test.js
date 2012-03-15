@@ -74,11 +74,22 @@ describe("Creating", function() {
   });
 });
 
+describe("Saving", function() {
+
+  it("saves without error", function(done) {
+    
+    db.Person.create({ name: 'Bob', age: 99 }, function (err, person) {
+      if (err) done(err);
+      done();
+    });
+  });
+});
+
 describe("Updating", function() {
 
   it("paritally updates model", function(done) {
     db.Person.create({ name: 'Bob', age: 99 }, function (err, person) {
-      if (err) { done(err); }
+      if (err) done(err);
       
       person.update({name:"Steve"}, function(err, person){
         if(err) return done(err);
@@ -141,13 +152,13 @@ describe("Finding", function(){
 
 describe("Destroying", function() {
   beforeEach(function(done) {
-    db.createPeople([{"_id": "34", name :"bob", age: 22}, db.people.steve], function(err) {
+    db.createPeople([{name: "bob", age: 22}, db.people.steve], function(err) {
       done();
     });
   });
   
   it("by id", function(done) {
-    db.Person.destroy("34", function(err, result) {
+    db.Person.destroy({name: "bob"}, function(err, result) {
       if(err) done(err);
 
       result.should.equal(1);
