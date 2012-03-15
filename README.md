@@ -20,7 +20,7 @@ This project is in a very early stage, with limited functionality. Don't use in 
   var Person = resourceful.define('person', function () {
 
     this.use('mongodb', {
-      connection: "mongodb://localhost/databaseName", // required - the mongo URI of the database
+      uri: "mongodb://localhost/databaseName", // required - the mongo URI of the database
       collection: "people", // required - the name of the collection
       safe: true // optional - run the driver in safe mode to ensure that the update succeeded. Defaults to false
     });
@@ -46,7 +46,7 @@ This project is in a very early stage, with limited functionality. Don't use in 
 
   //Open the mongodb connection
   resourceful.use('mongodb', {
-    connection: "mongodb://localhost/databaseName", // required - the connection to be opened
+    uri: "mongodb://localhost/databaseName", // required - the connection to be opened
     onConnect: function (err) { // required - the callback upon opening the database connection
         if (!err) app.start(8000);
     }
