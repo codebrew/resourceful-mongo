@@ -37,7 +37,7 @@ DB.createPerson = function(person, callback) {
 
 DB.drop = function(callback) {
 
-  this.timeout(10000);
+  this.timeout(10000); //The tests are a bit slow because the database is dropped before each one.
 
   if (!DB.Person.connection.connection) return callback();
 

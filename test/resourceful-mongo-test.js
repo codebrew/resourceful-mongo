@@ -100,7 +100,6 @@ describe("Updating", function() {
       });
     });
   });
-
 });
 
 describe("Finding", function(){
@@ -130,7 +129,6 @@ describe("Finding", function(){
 
         done();
       });
-
     });
   });
 
@@ -145,9 +143,7 @@ describe("Finding", function(){
         done();
       });
     });
-
   });
-
 });
 
 describe("Destroying", function() {
@@ -156,8 +152,21 @@ describe("Destroying", function() {
       done();
     });
   });
-  
+
   it("by id", function(done) {
+
+    db.Person.create(db.people.bob, function(err, bob) {
+      db.Person.destroy(bob.id, function(err, result) {
+
+        if(err) done(err);
+  
+        result.should.equal(1);
+        done();
+      });
+    });
+  });
+  
+  it("by name", function(done) {
     db.Person.destroy({name: "bob"}, function(err, result) {
       if(err) done(err);
 
