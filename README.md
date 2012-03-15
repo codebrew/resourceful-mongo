@@ -22,7 +22,7 @@ This project is in a very early stage, with limited functionality. Don't use in 
     this.use('mongodb', {
       connection: "mongodb://localhost/databaseName", // required - the mongo URI of the database
       collection: "people", // required - the name of the collection
-      safe : true // optional - run the driver in safe mode to ensure that the update succeeded. Defaults to false
+      safe: true // optional - run the driver in safe mode to ensure that the update succeeded. Defaults to false
     });
     
     this.string('name');
@@ -37,7 +37,7 @@ This project is in a very early stage, with limited functionality. Don't use in 
       host: "localhost", 
       database: "databaseName",
       collection: "flowers",
-      safe : true 
+      safe: true 
     });
     
     this.string('color');
@@ -46,9 +46,9 @@ This project is in a very early stage, with limited functionality. Don't use in 
 
   //Open the mongodb connection
   resourceful.use('mongodb', {
-    conection: "mongodb://localhost/markover", // required - the connection to be opened
-    onConnect: function(err) { // required - the callback upon opening the database connection
-        if (!err) app.start();
+    connection: "mongodb://localhost/markover", // required - the connection to be opened
+    onConnect: function (err) { // required - the callback upon opening the database connection
+        if (!err) app.start(8000);
     }
   });
 ```
