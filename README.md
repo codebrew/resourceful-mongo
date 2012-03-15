@@ -46,7 +46,7 @@ This project is in a very early stage, with limited functionality. Don't use in 
 
   //Open the mongodb connection
   resourceful.use('mongodb', {
-    connection: "mongodb://localhost/markover", // required - the connection to be opened
+    connection: "mongodb://localhost/databaseName", // required - the connection to be opened
     onConnect: function (err) { // required - the callback upon opening the database connection
         if (!err) app.start(8000);
     }
