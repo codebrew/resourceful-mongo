@@ -16,18 +16,40 @@ This project is in a very early stage, with limited functionality. Don't use in 
 ``` js
   var resourceful = require('resourceful-mongo');
   
+  //Define the resources
   var Person = resourceful.define('person', function () {
-    //
-    // Specify use of the mongodb engine
-    //
+
     this.use('mongodb', {
-      database: 'flatiron_test', //required - databasename which contains collections
-      collection: "people", // required - the collection to use for this resource
-      safe : true // optional - run the engine in safe mode to ensure that writes for this resource succeed. Defaults to false
+      connection: "mongodb://localhost/databaseName", // required - the mongo URI of the database
+      collection: "people", // required - the name of the collection
+      safe : true // optional - run the driver in safe mode to ensure that the update succeeded. Defaults to false
     });
     
     this.string('name');
     this.number('age');
+  });
+
+  var Flower = resourceful.define('flower', function () {
+
+    this.use('mongodb', {
+
+      //The mongo URI can also be defined piecemeal
+      host: "localhost", 
+      database: "databaseName",
+      collection: "flowers",
+      safe : true 
+    });
+    
+    this.string('color');
+    this.number('petals');
+  });
+
+  //Open the mongodb connection
+  resourceful.use('mongodb', {
+    conection: "mongodb://localhost/markover", // required - the connection to be opened
+    onConnect: function(err) { // required - the callback upon opening the database connection
+        if (!err) app.start();
+    }
   });
 ```
 
