@@ -14,14 +14,14 @@ This project is in a very early stage, with limited functionality. Don't use in 
 ## Example
 
 ``` js
-  var resourceful = require('resourceful');
-  require('resourceful-mongo');
+  var resourceful = require('resourceful-mongo');
   
   var Person = resourceful.define('person', function () {
     //
     // Specify use of the mongodb engine
     //
     this.use('mongodb', {
+      database: 'flatiron_test', //required - databasename which contains collections
       collection: "people", // required - the collection to use for this resource
       safe : true // optional - run the engine in safe mode to ensure that writes for this resource succeed. Defaults to false
     });
